@@ -16,7 +16,7 @@ function Index(){
   const [errorMessage, setErrorMessage] = useState("");
   
   const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
+    const data  = await commerce.products.list();
     setProducts(data);
   };
 
@@ -45,12 +45,10 @@ function Index(){
 
   const handleEmptyCart = async () => {
     const { cart } = await commerce.cart.empty();
-
     setCart(cart);
   };
 
   const refreshCart = async () => {
-
     setCart(cart);
   };
 
@@ -78,11 +76,9 @@ function Index(){
   return(
     <ThemeProvider theme = {theme}>
       
-      <Script src="https://js.stripe.com/v3/"/>
-      
+      <Navbar/>
 
-        
-        
+      <Script src="https://js.stripe.com/v3/"/>
         
         <Link href="/">
           <Products products={products} onAddToCart={handleAddToCart} />

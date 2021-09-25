@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 
   
 
-  const Navbar = ({ totalItems }) => {
+  const Navbar = (totalItems) => {
   const classes = useStyles();
   const router = useRouter();
   const location = router.pathname;
@@ -29,7 +29,7 @@ import { useRouter } from 'next/router';
           <div className={classes.grow} />
           {location === "/" && (
             <div className={classes.button}>
-             <IconButton ref={location} 
+             <IconButton ref={location+"cart"} 
                 aria-label="Show cart items"
                 color="inherit"
                 className="FancyIconButton"

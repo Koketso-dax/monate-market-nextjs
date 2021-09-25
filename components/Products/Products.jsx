@@ -9,11 +9,12 @@ const Products = ({ products, onAddToCart }) => {
     <main className={classes.content}>
       <div className={classes.toolbar} />
       <Grid container justify="center" spacing={1}>
-        {products.map((product) => (
+        {products.map( (product) => (
           <Grid item key={product.id} xs={6} sm={6} m={4} lg={3}>
             <Product product={product} onAddToCart={onAddToCart} />
           </Grid>
-        ))}
+)
+        )}
       </Grid>
     </main>
   );
