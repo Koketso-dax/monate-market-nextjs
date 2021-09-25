@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Container, Typography, Button, Grid } from "@material-ui/core";
 import useStyles from "./styles";
 import CartItem from "./CartItem/CartItem";
+import {Link} from "next/link";
+
 
 const Cart = ({
   cart,
@@ -16,7 +17,7 @@ const Cart = ({
     <Typography variant="subtitle1">
       You have no items in your shopping cart,
       <span> </span>
-      <Link to="/" className={classes.link}>
+      <Link href="/" className={classes.link}>
         start adding some!
       </Link>
     </Typography>
@@ -52,7 +53,7 @@ const Cart = ({
           </Button>
               <Button
                  component={Link}
-                 to='/checkout'
+                 href='/checkout'
             className={classes.checkoutButton}
             size="large"
             type="button"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useRouter } from 'next/router'
 import {
   Paper,
   Stepper,
@@ -11,17 +11,17 @@ import {
   Button,
   CssBaseline,
 } from "@material-ui/core";
-import { CallMissedSharp } from "@material-ui/icons";
 import useStyles from "./styles";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
-import { commerce } from "../../../lib/commerce";
+import commerce  from "../../../public/lib/commerce";
+import Link from 'next/link'
 
 const steps = ["Shipping address", "Payment details"];
 
 const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const history = useRouter();
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
   const [activeStep, setActiveStep] = useState(0);
@@ -35,7 +35,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         });
         setCheckoutToken(token);
       } catch (error) {
-        history.pushState("/");
+        history.push("/");
       }
     };
 
@@ -71,7 +71,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
             Order ref: {order.customer_reference}
           </Typography>
           <br />
-          <Button component={Link} to="/" variant="outlined" type="button">
+          <Button component={Link} href="/" variant="outlined" type="button">
             Back to home
           </Button>
         </div>
@@ -81,7 +81,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         <Typography variant="h5">Thank you for your purchase.</Typography>
         <Divider className={classes.divider} />
         <br />
-        <Button component={Link} to="/" variant="outlined" type="button">
+        <Button component={Link} href="/" variant="outlined" type="button">
           Back to home
         </Button>
       </div>
@@ -95,7 +95,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     <>
       <Typography variant="h5">Error: {error}</Typography>
       <br />
-      <Button component={Link} to="/" variant="outlined" type="button">
+      <Button component={Link} href="/" variant="outlined" type="button">
         Back to home
       </Button>
     </>;

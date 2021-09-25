@@ -9,8 +9,8 @@ import {
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import FormInput from "./FormInput";
-import { Link } from "react-router-dom";
-import { commerce } from "../../lib/commerce";
+import commerce  from "../../public/lib/commerce";
+import Link from 'next/link';
 
 const AddressForm = ({ checkoutToken, next }) => {
   const [shippingCountries, setShippingCountries] = useState([]);
@@ -68,7 +68,7 @@ const AddressForm = ({ checkoutToken, next }) => {
 
   useEffect(() => {
     fetchShippingCountries(checkoutToken.id);
-  }, []);
+  }, [checkoutToken.id]);
 
   useEffect(() => {
     if (shippingCountry) {
@@ -83,7 +83,7 @@ const AddressForm = ({ checkoutToken, next }) => {
         shippingCountry,
         shippingSubdivision
       );
-  }, [shippingSubdivision]);
+  }, [checkoutToken.id, shippingCountry, shippingSubdivision]);
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -143,7 +143,7 @@ const AddressForm = ({ checkoutToken, next }) => {
           </Grid>
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Button component={Link} to="/cart" variant="outlined">
+            <Button component={Link} href="/cart" variant="outlined">
               Back to Cart
             </Button>
             <Button type="submit" variant="contained" color="primary">

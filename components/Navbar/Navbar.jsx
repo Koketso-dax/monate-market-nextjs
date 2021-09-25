@@ -3,31 +3,17 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Badge,
-  MenuItem,
-  Menu,
-  Typography,
+  Badge
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
-import { mergeClasses } from "@material-ui/styles";
-import logo from "../../assets/Capture.png";
 import useStyles from "./styles";
-import { Link, useLocation } from "react-router-dom";
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-const Navbar = ({ totalItems }) => {
-  const classes = useStyles();
-  const location = useLocation();
-
-  return (
-    <>
-      <AppBar position="fixed" className={classes.appBar} color="inherit">
-        <Toolbar>
-          <div className={classes.grow} />
-          {location.pathname === "/" && (
-            <div className={classes.button}>
+const Cart = React.forwardRef(
+  
+            <Link href="/cart" passHref>
               <IconButton
-                component={Link}
-                to="/cart"
                 aria-label="Show cart items"
                 color="inherit"
               >
@@ -35,6 +21,26 @@ const Navbar = ({ totalItems }) => {
                   <ShoppingCart />
                 </Badge>
               </IconButton>
+              </Link>
+ 
+)
+  
+
+  const Navbar = ({ totalItems }) => {
+  const classes = useStyles();
+  const router = useRouter();
+  const location = router.pathname;
+
+  return (
+    <>
+      <AppBar position="fixed" className={classes.appBar} color="inherit">
+        <Toolbar>
+          <div className={classes.grow} />
+          {location === "/" && (
+            <div className={classes.button}>
+
+              
+
             </div>
           )}
         </Toolbar>
