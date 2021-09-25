@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
-import commerce  from "../public/lib/commerce";
-import { Products, Navbar, Cart, Checkout } from "../components";
-import { ThemeProvider } from "@material-ui/core";
+import commerce  from "../public/lib/commerce.js";
+import {Products, Navbar, Cart, Checkout} from "../components";
+import {ThemeProvider } from "@material-ui/core";
 import theme from "../public/theme";
-import {useRouter} from 'next/router';
 import Link from 'next/Link';
-import Head from "../components/head";
+import Script from 'next/script'
 
 
 function Index(){
 
   
-  const router = useRouter();
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
     setProducts(data);
@@ -25,13 +24,15 @@ function Index(){
     setCart(await commerce.cart.retrieve());
   };
 
+
+
   const handleAddToCart = async (productId, quantity) => {
     const { cart } = await commerce.cart.add(productId, quantity);
     setCart(cart);
   };
 
   const handleUpdateCartQty = async (productId, quantity) => {
-    const { cart } = await commerce.cart.update(productId, { quantity });
+    const { cart } = await commerce.cart.update(productId, quantity);
 
     setCart(cart);
   };
@@ -49,7 +50,6 @@ function Index(){
   };
 
   const refreshCart = async () => {
-    const newCart = await commerce.cart.refresh();
 
     setCart(cart);
   };
@@ -67,15 +67,19 @@ function Index(){
       setErrorMessage(error.data.error.message);
     }
   };
-  useEffect(() => {
+    useEffect(() => {
+
     fetchProducts();
+
     fetchCart();
+
   }, []);
 
   return(
-    <div>
-      <Head/>
-      <ThemeProvider theme = {theme}>
+    <ThemeProvider theme = {theme}>
+      
+      <Script src="https://js.stripe.com/v3/"/>
+      
 
         <Navbar totalItems={cart.total_items} />
         
@@ -100,8 +104,8 @@ function Index(){
                 error={errorMessage}
               />
         </Link>
+
       </ThemeProvider>
-    </div>
 
   );
 }

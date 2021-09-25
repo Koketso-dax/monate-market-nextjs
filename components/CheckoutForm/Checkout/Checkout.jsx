@@ -14,8 +14,8 @@ import {
 import useStyles from "./styles";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
-import commerce  from "../../../public/lib/commerce";
-import Link from 'next/link'
+import commerce  from "../../../public/lib/commerce.js";
+import Link from 'next/Link'
 
 const steps = ["Shipping address", "Payment details"];
 
@@ -40,7 +40,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     };
 
     generateToken();
-  }, [cart]);
+  }, [cart, history]);
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);

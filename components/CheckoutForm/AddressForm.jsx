@@ -9,8 +9,8 @@ import {
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 import FormInput from "./FormInput";
-import commerce  from "../../public/lib/commerce";
-import Link from 'next/link';
+import commerce  from "../../public/lib/commerce.js";
+import Link from 'next/Link';
 
 const AddressForm = ({ checkoutToken, next }) => {
   const [shippingCountries, setShippingCountries] = useState([]);
