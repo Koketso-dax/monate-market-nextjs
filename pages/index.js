@@ -81,7 +81,7 @@ function Index(){
       <Script src="https://js.stripe.com/v3/"/>
       
 
-        <Navbar totalItems={cart.total_items} />
+        
         
         
         <Link href="/">
